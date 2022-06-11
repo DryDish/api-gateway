@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "fa984e12-1f69-49e9-bdb0-ddf7ad8ec130",
+		"name": "API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12895297"
+	},
+	"item": [
+		{
+			"name": "user-service",
+			"item": [
+				{
+					"name": "get users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user-host}}/users",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"benins\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user-host}}/login",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/*",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user-host}}/",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "data-writer-service",
+			"item": [
+				{
+					"name": "attend",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"lectureId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data-writer-host}}/attend",
+							"host": [
+								"{{data-writer-host}}"
+							],
+							"path": [
+								"attend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data-writer-host}}/generate/1",
+							"host": [
+								"{{data-writer-host}}"
+							],
+							"path": [
+								"generate",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/*",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data-writer-host}}/",
+							"host": [
+								"{{data-writer-host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "data-reader-service",
+			"item": [
+				{
+					"name": "attendance-by-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data-reader-host}}/attendance-by-user/1",
+							"host": [
+								"{{data-reader-host}}"
+							],
+							"path": [
+								"attendance-by-user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/*",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data-reader-host}}/",
+							"host": [
+								"{{data-reader-host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user-host",
+			"value": "localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "data-writer-host",
+			"value": "localhost:4001",
+			"type": "string"
+		},
+		{
+			"key": "data-reader-host",
+			"value": "localhost:5001",
+			"type": "string"
+		}
+	]
+}
