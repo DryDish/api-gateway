@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  reader-api:
+    container_name: reader-api
+    build:
+      context: .
+      dockerfile: ./configs/data-reader-service/Dockerfile
+    networks:
+      - proxy-net
+    # ports:
+    #   - 5001:5001
+    restart: always
+
+  writer-api:
+    container_name: writer-api
+    build:
+      context: .
+      dockerfile: ./configs/data-writer-service/Dockerfile
+    networks:
+      - proxy-net
+    # ports:
+    #   - 4001:4001
+    restart: always
+
+  user-api:
+    container_name: user-api
+    build:
+      context: .
+      dockerfile: ./configs/user-service/Dockerfile
+    networks:
+      - proxy-net
+    # ports:
+    # - 3001:3001
+    restart: always
+
+
+  api-gateway:
+    container_name: reverse-proxy
+    build: 
+      context: .
+      dockerfile: ./configs/gateway/Dockerfile
+    networks:
+      - proxy-net
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+
+
+networks:
+  proxy-net:
+    name: proxy-net

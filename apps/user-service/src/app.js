@@ -6,6 +6,13 @@ const PORT = process.env.USER_SERVICE_PORT || 3001;
 const app = express();
 app.use(json());
 
+const userList = [
+	{name: "Ben Billowier", role: "teacher"},
+	{name: "Bob Bobbert", role: "student"},
+	{name: "Bill Bone", role: "student"},
+	{name: "Bam Bamboo", role: "teacher"}
+]
+
 app.post('/login', (req, res) => {
 	console.log('/login was hit');
 	console.log(`request body was: ${JSON.stringify(req.body)}`);
@@ -14,7 +21,7 @@ app.post('/login', (req, res) => {
 
 app.get('/users', (_req, res) => {
 	console.log('/users was hit');
-	res.send({ message: '/users called' });
+	res.send(userList);
 });
 
 app.all('/*', (_req, res) => {

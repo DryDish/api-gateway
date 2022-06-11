@@ -81,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userId\": 1,\n    \"lectureId\": 2\n}",
+							"raw": "{\n    \"userName\": \"Bob Bobbert\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,13 +106,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{data-writer-host}}/generate/1",
+							"raw": "{{data-writer-host}}/generate/2",
 							"host": [
 								"{{data-writer-host}}"
 							],
 							"path": [
 								"generate",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -202,16 +202,34 @@
 		{
 			"key": "user-host",
 			"value": "localhost:3001",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		},
 		{
 			"key": "data-writer-host",
 			"value": "localhost:4001",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		},
 		{
 			"key": "data-reader-host",
 			"value": "localhost:5001",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "user-host",
+			"value": "{{host}}",
+			"type": "string"
+		},
+		{
+			"key": "data-writer-host",
+			"value": "{{host}}",
+			"type": "string"
+		},
+		{
+			"key": "data-reader-host",
+			"value": "{{host}}",
 			"type": "string"
 		}
 	]
