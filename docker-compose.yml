@@ -8,8 +8,6 @@ services:
       dockerfile: ./configs/data-reader-service/Dockerfile
     networks:
       - proxy-net
-    # ports:
-    #   - 5001:5001
     restart: always
 
   writer-api:
@@ -23,20 +21,26 @@ services:
     #   - 4001:4001
     restart: always
 
-  user-api:
-    container_name: user-api
+  user-api-1:
+    container_name: user-api-1
     build:
       context: .
       dockerfile: ./configs/user-service/Dockerfile
     networks:
       - proxy-net
-    # ports:
-    # - 3001:3001
+    restart: always
+  
+  user-api-2:
+    container_name: user-api-2
+    build:
+      context: .
+      dockerfile: ./configs/user-service/Dockerfile
+    networks:
+      - proxy-net
     restart: always
 
-
   api-gateway:
-    container_name: reverse-proxy
+    container_name: api-gateway
     build: 
       context: .
       dockerfile: ./configs/gateway/Dockerfile
@@ -44,10 +48,14 @@ services:
       - proxy-net
     ports:
       - 80:80
-      - 443:443
+    #  - 443:443
     restart: always
-
+    #deploy:
+    #  mode: replicated
+    #  replicas: 2
+      #endpoint_mode: voip
 
 networks:
   proxy-net:
     name: proxy-net
+    #driver: default
