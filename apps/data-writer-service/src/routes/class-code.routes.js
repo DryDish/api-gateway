@@ -1,5 +1,5 @@
 import Express from "express";
-import { teacherGuard } from "../middleware/authorise.middleware.js";
+import { teacherGuard } from "../middleware/authorize.middleware.js";
 import { ClassCodeService } from "../service/class-code-service.js";
 
 const router = Express.Router();

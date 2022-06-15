@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express, { json } from 'express';
-import { attendanceRouter } from './routes/attendace.routes.js';
+import { attendanceRouter } from './routes/attendance.routes.js';
 import { lectureRouter } from './routes/lecture.routes.js';
 import { subjectRouter } from './routes/subject.routes.js';
 import { sequelize as _ } from './config/sequelize.js';
