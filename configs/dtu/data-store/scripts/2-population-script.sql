@@ -1,4 +1,4 @@
-
+USE `dtu`;
 -- Classes ---------------------------------------------------------------------
 INSERT INTO classes VALUES(1, "DTU SW20");
 INSERT INTO classes VALUES(2, "DTU WD20");

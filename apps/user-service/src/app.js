@@ -1,5 +1,7 @@
 import 'dotenv/config';
+import './config/sequelize.js';
 import express, { json } from 'express';
+import { UserRouter } from './routes/user.routes.js';
 
 const PORT = process.env.USER_SERVICE_PORT || 3001;
 
@@ -19,10 +21,7 @@ app.post('/login', (req, res) => {
 	res.send({ message: '/login called' });
 });
 
-app.get('/users', (_req, res) => {
-	console.log('User API was called on GET /users');
-	res.send(userList);
-});
+app.use('/users', UserRouter)
 
 app.all('/*', (_req, res) => {
 	console.log('User API was called on ALL /*');

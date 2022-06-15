@@ -138,21 +138,31 @@ services:
 
   user-api-1:
     container_name: user-api-1
+    env_file:
+      - ./configs/user-service/user.env
     build:
       context: .
       dockerfile: ./configs/user-service/Dockerfile
     networks:
       - proxy-net
     restart: always
+    depends_on:
+      user-db:
+        condition: service_healthy
   
   user-api-2:
     container_name: user-api-2
+    env_file:
+      - ./configs/user-service/user.env
     build:
       context: .
       dockerfile: ./configs/user-service/Dockerfile
     networks:
       - proxy-net
     restart: always
+    depends_on:
+      user-db:
+        condition: service_healthy
 
 # ----------------------------------------
 # ------------------ DB ------------------
@@ -190,6 +200,23 @@ services:
       start_period: 3s
     cap_add:
       - SYS_NICE
+
+  user-db:
+    container_name: user-db
+    build: 
+      context: .
+      dockerfile: ./configs/user-service/data-store/Dockerfile
+    env_file:  ./configs/user-service/data-store/database.env
+    networks:
+      - proxy-net
+    healthcheck:
+      test: ["CMD-SHELL", "/usr/bin/mysql --user=$MYSQL_USER_USER_SERVICE --password=$MYSQL_PASSWORD_USER_SERVICE --execute 'SHOW DATABASES';"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+      start_period: 3s
+    ports:
+      - 3306:3306
 
 # ----------------------------------------
 # --------------API-GATEWAY --------------

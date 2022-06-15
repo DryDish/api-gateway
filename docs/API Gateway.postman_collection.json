@@ -10,7 +10,7 @@
 			"name": "user-service",
 			"item": [
 				{
-					"name": "get users",
+					"name": "get all users",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"host": true
@@ -47,6 +47,120 @@
 							],
 							"path": [
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"value": "{{host-kea}}",
+								"description": "simulate kea's login url",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{host-dtu}}",
+								"description": "simulate dtu's login url",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{host-user}}",
+								"description": "simulate user endpoint",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{user-host}}/users",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Added user\",\n    \"email\": \"some email\",\n    \"password\": \"12345\",\n    \"roleId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user-host}}/users",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"update user\",\n    \"email\": \"some other email\",\n    \"password\": \"12345\",\n    \"roleId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user-host}}/users/14",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								"users",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{user-host}}/users/14",
+							"host": [
+								"{{user-host}}"
+							],
+							"path": [
+								"users",
+								"14"
 							]
 						}
 					},

@@ -1,4 +1,4 @@
-
+USE `kea`;
 -- Classes ---------------------------------------------------------------------
 INSERT INTO classes VALUES(1, "KEA SW20");
 INSERT INTO classes VALUES(2, "KEA WD20");
