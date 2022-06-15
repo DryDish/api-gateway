@@ -3,7 +3,7 @@ import { Sequelize } from 'sequelize';
 import { modelLoader } from '../utils/model-loader.js';
 
 // Constants
-const HOST = process.env.MYSQL_DB_HOST || 'localhost';
+const HOST = process.env.MYSQL_DB_HOST ||  'localhost';
 const USER = process.env.MYSQL_USER || '';
 const PASSWORD = process.env.MYSQL_PASSWORD || '';
 const SCHEMA = process.env.MYSQL_DATABASE || '';

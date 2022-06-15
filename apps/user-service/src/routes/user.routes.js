@@ -2,10 +2,9 @@ import express from "express";
 import { User } from "../models/user.model.js";
 import { responseHandler } from "../utils/response-handler.js";
 import { GenericService } from "../service/generic-service.js";
+import { teacherGuard } from "../middleware/authorise.middleware.js";
 
 const router = express.Router();
-
-// TODO - StudentSelfGuard here
 
 const userService = new GenericService(User);
 router.get("/:id", async (req, res) => {
@@ -16,7 +15,7 @@ router.get("/:id", async (req, res) => {
   responseHandler("User", response, res);
 });
 
-// router.use(teacherGuard);
+router.use(teacherGuard);
 
 router.get("/", async (_req, res) => {
   console.log("user-api called on GET users/");

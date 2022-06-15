@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `users`.`users` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `role_id` INT NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `email` (`email` ASC) VISIBLE,

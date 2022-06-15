@@ -2,6 +2,8 @@ import 'dotenv/config';
 import './config/sequelize.js';
 import express, { json } from 'express';
 import { UserRouter } from './routes/user.routes.js';
+import { authRouter } from './routes/auth.routes.js';
+import { verifyToken } from './middleware/authorise.middleware.js';
 
 const PORT = process.env.USER_SERVICE_PORT || 3001;
 
@@ -20,6 +22,10 @@ app.post('/login', (req, res) => {
 	console.log(`request body was: ${JSON.stringify(req.body)}`);
 	res.send({ message: '/login called' });
 });
+
+app.use('/auth', authRouter);
+
+app.use(verifyToken);
 
 app.use('/users', UserRouter)
 
