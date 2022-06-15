@@ -4,7 +4,7 @@ import { userAssociationInit, userInit } from "../models/user.model.js";
 
 const modelLoader = (sequelize) => {
 	loadModels(sequelize);
-  loadAssociations(sequelize)
+  loadAssociations()
 };
 
 const loadModels = (sequelize) => {
