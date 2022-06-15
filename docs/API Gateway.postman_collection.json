@@ -11,9 +11,35 @@
 			"item": [
 				{
 					"name": "get users",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Host",
+								"value": "{{host-kea}}",
+								"description": "simulate kea's login url",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{host-dtu}}",
+								"description": "simulate dtu's login url",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{host-user}}",
+								"description": "simulate user endpoint",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{user-host}}/users",
 							"host": [
@@ -72,74 +98,207 @@
 			]
 		},
 		{
-			"name": "data-writer-service",
+			"name": "data-reader-service-kea",
 			"item": [
 				{
-					"name": "attend",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"userName\": \"Bob Bobbert\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "attendances",
+					"item": [
+						{
+							"name": "all",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
 								}
-							}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "www.kea-login.dk",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-reader-host}}/attendances",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"attendances"
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{data-writer-host}}/attend",
-							"host": [
-								"{{data-writer-host}}"
-							],
-							"path": [
-								"attend"
-							]
+						{
+							"name": "by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-reader-host}}/attendances/11",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"attendances",
+										"11"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "generate",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{data-writer-host}}/generate/2",
-							"host": [
-								"{{data-writer-host}}"
-							],
-							"path": [
-								"generate",
-								"2"
-							]
+					"name": "lectures",
+					"item": [
+						{
+							"name": "all",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-reader-host}}/lectures",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"lectures"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{data-reader-host}}/lectures/1",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"lectures",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "/*",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{data-writer-host}}/",
-							"host": [
-								"{{data-writer-host}}"
-							],
-							"path": [
-								""
-							]
+					"name": "subjects",
+					"item": [
+						{
+							"name": "all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{data-reader-host}}/subjects",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"subjects"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{data-reader-host}}/subjects/10",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"subjects",
+										"10"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "data-reader-service",
-			"item": [
+					]
+				},
 				{
 					"name": "attendance-by-user",
 					"request": {
@@ -167,6 +326,168 @@
 							"raw": "{{data-reader-host}}/",
 							"host": [
 								"{{data-reader-host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "data-writer-service-kea",
+			"item": [
+				{
+					"name": "class-code",
+					"item": [
+						{
+							"name": "attend",
+							"item": [
+								{
+									"name": "with code",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Host",
+												"value": "{{host-kea}}",
+												"description": "simulate kea's login url",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Host",
+												"value": "{{host-dtu}}",
+												"description": "simulate dtu's login url",
+												"type": "text"
+											},
+											{
+												"key": "Host",
+												"value": "{{host-user}}",
+												"description": "simulate user endpoint",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"2\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{data-writer-host}}/class-codes/attend/XKQKVCJV",
+											"host": [
+												"{{data-writer-host}}"
+											],
+											"path": [
+												"class-codes",
+												"attend",
+												"XKQKVCJV"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "get class-code by lectureId",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-writer-host}}/class-codes/1",
+									"host": [
+										"{{data-writer-host}}"
+									],
+									"path": [
+										"class-codes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete class-code by lectureId",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-writer-host}}/class-codes/1",
+									"host": [
+										"{{data-writer-host}}"
+									],
+									"path": [
+										"class-codes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/*",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data-writer-host}}/",
+							"host": [
+								"{{data-writer-host}}"
 							],
 							"path": [
 								""
@@ -219,17 +540,32 @@
 		},
 		{
 			"key": "user-host",
-			"value": "{{host}}",
+			"value": "localhost:80",
 			"type": "string"
 		},
 		{
 			"key": "data-writer-host",
-			"value": "{{host}}",
+			"value": "localhost:80",
 			"type": "string"
 		},
 		{
 			"key": "data-reader-host",
-			"value": "{{host}}",
+			"value": "localhost:80",
+			"type": "string"
+		},
+		{
+			"key": "host-kea",
+			"value": "kea.attendance-system.dk",
+			"type": "string"
+		},
+		{
+			"key": "host-user",
+			"value": "user.attendance-system.dk",
+			"type": "string"
+		},
+		{
+			"key": "host-dtu",
+			"value": "dtu.attendance-system.dk",
 			"type": "string"
 		}
 	]

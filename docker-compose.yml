@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+
+# ------------------------------------------
+# ------------------ KEA -------------------
+
+# --------------- READER API ---------------
+
   reader-api-kea-1:
     container_name: reader-api-kea-1
     env_file:
@@ -15,6 +21,21 @@ services:
       kea-db:
         condition: service_healthy
 
+  reader-api-kea-2:
+    container_name: reader-api-kea-2
+    env_file:
+      - ./configs/kea/data-reader-service/reader.env
+    build:
+      context: .
+      dockerfile: ./configs/kea/data-reader-service/Dockerfile
+    networks:
+      - proxy-net
+    restart: always
+    depends_on:
+      kea-db:
+        condition: service_healthy
+
+# --------------- WRITER API ---------------
 
   writer-api-kea-1:
     container_name: writer-api-kea-1
@@ -29,6 +50,91 @@ services:
     depends_on:
       kea-db:
         condition: service_healthy
+
+  writer-api-kea-2:
+    container_name: writer-api-kea-2
+    env_file:
+      - ./configs/kea/data-writer-service/writer.env
+    build:
+      context: .
+      dockerfile: ./configs/kea/data-writer-service/Dockerfile
+    networks:
+      - proxy-net
+    restart: always
+    depends_on:
+      kea-db:
+        condition: service_healthy
+
+
+# ------------------------------------------
+# ------------------- DTU  -----------------
+
+# --------------- READER API ---------------
+
+  reader-api-dtu-1:
+    container_name: reader-api-dtu-1
+    env_file:
+      - ./configs/dtu/data-reader-service/reader.env
+    build:
+      context: .
+      dockerfile: ./configs/dtu/data-reader-service/Dockerfile
+    networks:
+      - proxy-net
+    restart: always
+    depends_on:
+      dtu-db:
+        condition: service_healthy
+
+  reader-api-dtu-2:
+    container_name: reader-api-dtu-2
+    env_file:
+      - ./configs/dtu/data-reader-service/reader.env
+    build:
+      context: .
+      dockerfile: ./configs/dtu/data-reader-service/Dockerfile
+    networks:
+      - proxy-net
+    restart: always
+    depends_on:
+      dtu-db:
+        condition: service_healthy
+
+
+
+# --------------- WRITER API ---------------
+
+  writer-api-dtu-1:
+    container_name: writer-api-dtu-1
+    env_file:
+      - ./configs/dtu/data-writer-service/writer.env
+    build:
+      context: .
+      dockerfile: ./configs/dtu/data-writer-service/Dockerfile
+    networks:
+      - proxy-net
+    restart: always
+    depends_on:
+      dtu-db:
+        condition: service_healthy
+
+  writer-api-dtu-2:
+    container_name: writer-api-dtu-2
+    env_file:
+      - ./configs/dtu/data-writer-service/writer.env
+    build:
+      context: .
+      dockerfile: ./configs/dtu/data-writer-service/Dockerfile
+    networks:
+      - proxy-net
+    restart: always
+    depends_on:
+      dtu-db:
+        condition: service_healthy
+
+
+
+# ----------------------------------------
+# --------------- USER API ---------------
 
   user-api-1:
     container_name: user-api-1
@@ -48,6 +154,9 @@ services:
       - proxy-net
     restart: always
 
+# ----------------------------------------
+# ------------------ DB ------------------
+
   kea-db:
     container_name: kea-db
     build: 
@@ -56,16 +165,34 @@ services:
     env_file:  ./configs/kea/data-store/database.env
     networks:
       - proxy-net
-    ports:
-      - 3306:3306
     healthcheck:
-      test: ["CMD-SHELL", "/usr/bin/mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --execute 'SHOW DATABASES';"]
+      test: ["CMD-SHELL", "/usr/bin/mysql --user=$MYSQL_USER_KEA --password=$MYSQL_PASSWORD_KEA --execute 'SHOW DATABASES';"]
       interval: 3s
       timeout: 2s
       retries: 10
       start_period: 3s
     cap_add:
       - SYS_NICE
+
+  dtu-db:
+    container_name: dtu-db
+    build: 
+      context: .
+      dockerfile: ./configs/dtu/data-store/Dockerfile
+    env_file:  ./configs/dtu/data-store/database.env
+    networks:
+      - proxy-net
+    healthcheck:
+      test: ["CMD-SHELL", "/usr/bin/mysql --user=$MYSQL_USER_DTU --password=$MYSQL_PASSWORD_DTU --execute 'SHOW DATABASES';"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+      start_period: 3s
+    cap_add:
+      - SYS_NICE
+
+# ----------------------------------------
+# --------------API-GATEWAY --------------
 
   api-gateway:
     container_name: api-gateway
@@ -84,6 +211,8 @@ services:
       - user-api-2
       - writer-api-kea-1
       - reader-api-kea-1
+      - writer-api-dtu-1
+      - reader-api-dtu-1
 
 networks:
   proxy-net:

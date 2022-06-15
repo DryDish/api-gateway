@@ -21,7 +21,7 @@ export const sequelize = new Sequelize(SCHEMA, USER, PASSWORD, {
 const loadDb = async () => {
 	try {
 		modelLoader(sequelize);
-		await sequelize.sync({ alter: true });
+		// await sequelize.sync({ alter: true });
 		console.log('\n\tDB loaded successfully');
 	} catch (error) {
 		console.error('\n\tFailed to load db: ', error);
