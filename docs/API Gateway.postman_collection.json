@@ -10,14 +10,217 @@
 			"name": "user-service",
 			"item": [
 				{
-					"name": "get all users",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"host": true
+					"name": "users",
+					"item": [
+						{
+							"name": "get all users",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{user-host}}/users",
+									"host": [
+										"{{user-host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get one user",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{user-host}}/users/6",
+									"host": [
+										"{{user-host}}"
+									],
+									"path": [
+										"users",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Added user\",\n    \"email\": \"some email\",\n    \"password\": \"12345\",\n    \"roleId\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user-host}}/users",
+									"host": [
+										"{{user-host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"update user\",\n    \"email\": \"some other email\",\n    \"password\": \"12345\",\n    \"roleId\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user-host}}/users/14",
+									"host": [
+										"{{user-host}}"
+									],
+									"path": [
+										"users",
+										"14"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{user-host}}/users/14",
+									"host": [
+										"{{user-host}}"
+									],
+									"path": [
+										"users",
+										"14"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MURDER",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{user-host}}/users/murder",
+									"host": [
+										"{{user-host}}"
+									],
+									"path": [
+										"users",
+										"murder"
+									]
+								}
+							},
+							"response": []
 						}
+					]
+				},
+				{
+					"name": "login - teacher",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
 					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Host",
@@ -37,30 +240,39 @@
 								"key": "Host",
 								"value": "{{host-user}}",
 								"description": "simulate user endpoint",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ann@kea.dk\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{user-host}}/users",
+							"raw": "{{user-host}}/auth/login",
 							"host": [
 								"{{user-host}}"
 							],
 							"path": [
-								"users"
+								"auth",
+								"login"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "get one user",
+					"name": "login - student",
 					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"host": true
-						}
+						"disabledSystemHeaders": {}
 					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Host",
@@ -80,29 +292,13 @@
 								"key": "Host",
 								"value": "{{host-user}}",
 								"description": "simulate user endpoint",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
-						"url": {
-							"raw": "{{user-host}}/users",
-							"host": [
-								"{{user-host}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "add user",
-					"request": {
-						"method": "POST",
-						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Added user\",\n    \"email\": \"some email\",\n    \"password\": \"12345\",\n    \"roleId\": \"1\"\n}",
+							"raw": "{\n    \"email\": \"ada@stud.kea.dk\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,82 +306,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{user-host}}/users",
+							"raw": "{{user-host}}/auth/login",
 							"host": [
 								"{{user-host}}"
 							],
 							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update user",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"update user\",\n    \"email\": \"some other email\",\n    \"password\": \"12345\",\n    \"roleId\": \"1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{user-host}}/users/14",
-							"host": [
-								"{{user-host}}"
-							],
-							"path": [
-								"users",
-								"14"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete user",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{user-host}}/users/14",
-							"host": [
-								"{{user-host}}"
-							],
-							"path": [
-								"users",
-								"14"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"benins\",\n    \"password\": \"123456\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{user-host}}/login",
-							"host": [
-								"{{user-host}}"
-							],
-							"path": [
+								"auth",
 								"login"
 							]
 						}
@@ -304,6 +430,50 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "MURDER",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-reader-host}}/attendances/murder",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"attendances",
+										"murder"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -370,6 +540,50 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "MURDER",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-reader-host}}/lectures/murder",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"lectures",
+										"murder"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -378,9 +592,35 @@
 					"item": [
 						{
 							"name": "all",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
 								"url": {
 									"raw": "{{data-reader-host}}/subjects",
 									"host": [
@@ -406,6 +646,50 @@
 									"path": [
 										"subjects",
 										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MURDER",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Host",
+										"value": "{{host-kea}}",
+										"description": "simulate kea's login url",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "{{host-dtu}}",
+										"description": "simulate dtu's login url",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Host",
+										"value": "{{host-user}}",
+										"description": "simulate user endpoint",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{data-reader-host}}/subjects/murder",
+									"host": [
+										"{{data-reader-host}}"
+									],
+									"path": [
+										"subjects",
+										"murder"
 									]
 								}
 							},
@@ -514,7 +798,12 @@
 							]
 						},
 						{
-							"name": "get class-code by lectureId",
+							"name": "class-code by lectureId",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -522,14 +811,14 @@
 										"key": "Host",
 										"value": "{{host-kea}}",
 										"description": "simulate kea's login url",
-										"type": "text",
-										"disabled": true
+										"type": "text"
 									},
 									{
 										"key": "Host",
 										"value": "{{host-dtu}}",
 										"description": "simulate dtu's login url",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									},
 									{
 										"key": "Host",
@@ -553,7 +842,7 @@
 							"response": []
 						},
 						{
-							"name": "delete class-code by lectureId",
+							"name": "class-code by lectureId",
 							"request": {
 								"method": "DELETE",
 								"header": [
@@ -613,6 +902,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYW5uQGtlYS5kayIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNjU1MzMxMjg3LCJleHAiOjE2NTUzMzQ4ODd9.XCYV5t8QhDGG3g3pMpu3al3qnMSq7A_cBOHQ3H0W3gI",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
