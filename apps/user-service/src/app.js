@@ -14,17 +14,18 @@ const userList = [
 ]
 
 app.post('/login', (req, res) => {
-	console.log('/login was hit');
+	console.log('User API was called on POST /users');
 	console.log(`request body was: ${JSON.stringify(req.body)}`);
 	res.send({ message: '/login called' });
 });
 
 app.get('/users', (_req, res) => {
-	console.log('/users was hit');
+	console.log('User API was called on GET /users');
 	res.send(userList);
 });
 
 app.all('/*', (_req, res) => {
+	console.log('User API was called on ALL /*');
 	console.log('user-service /* was hit');
 	res.status(403).send({ message: 'For Biden' });
 });

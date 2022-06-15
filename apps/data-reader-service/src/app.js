@@ -1,15 +1,18 @@
 import 'dotenv/config';
-import express from 'express';
+import express, { json } from 'express';
+import { attendanceRouter } from "./routes/attendace.routes.js";
+import { lectureRouter } from './routes/lecture.routes.js';
+import { subjectRouter } from './routes/subject.routes.js';
+import { sequelize as _ } from './config/sequelize.js';
 
 const PORT = process.env.DATA_READER_PORT || 5001;
 
 const app = express();
+app.use(json());
 
-app.get('/attendance-by-user/:userId', (req, res) => {
-	const { userId } = req.params;
-	console.log(`/attendance-by-user was hit with params: ${userId}`);
-	res.send({ message: '/attendance-by-user called' });
-});
+app.use('/attendances', attendanceRouter);
+app.use('/lectures', lectureRouter);
+app.use('/subjects', subjectRouter);
 
 app.all('/*', (_req, res) => {
 	console.log('data-reader-service /* was hit');

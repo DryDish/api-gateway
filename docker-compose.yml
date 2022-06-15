@@ -1,25 +1,34 @@
 version: '3'
 
 services:
-  reader-api:
-    container_name: reader-api
+  reader-api-kea-1:
+    container_name: reader-api-kea-1
+    env_file:
+      - ./configs/kea/data-reader-service/reader.env
     build:
       context: .
-      dockerfile: ./configs/data-reader-service/Dockerfile
+      dockerfile: ./configs/kea/data-reader-service/Dockerfile
     networks:
       - proxy-net
     restart: always
+    depends_on:
+      kea-db:
+        condition: service_healthy
 
-  writer-api:
-    container_name: writer-api
+
+  writer-api-kea-1:
+    container_name: writer-api-kea-1
+    env_file:
+      - ./configs/kea/data-writer-service/writer.env
     build:
       context: .
-      dockerfile: ./configs/data-writer-service/Dockerfile
+      dockerfile: ./configs/kea/data-writer-service/Dockerfile
     networks:
       - proxy-net
-    # ports:
-    #   - 4001:4001
     restart: always
+    depends_on:
+      kea-db:
+        condition: service_healthy
 
   user-api-1:
     container_name: user-api-1
@@ -39,6 +48,25 @@ services:
       - proxy-net
     restart: always
 
+  kea-db:
+    container_name: kea-db
+    build: 
+      context: .
+      dockerfile: ./configs/kea/data-store/Dockerfile
+    env_file:  ./configs/kea/data-store/database.env
+    networks:
+      - proxy-net
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD-SHELL", "/usr/bin/mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --execute 'SHOW DATABASES';"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+      start_period: 3s
+    cap_add:
+      - SYS_NICE
+
   api-gateway:
     container_name: api-gateway
     build: 
@@ -50,10 +78,12 @@ services:
       - 80:80
     #  - 443:443
     restart: always
-    #deploy:
-    #  mode: replicated
-    #  replicas: 2
-      #endpoint_mode: voip
+    depends_on:
+      - kea-db
+      - user-api-1
+      - user-api-2
+      - writer-api-kea-1
+      - reader-api-kea-1
 
 networks:
   proxy-net:
