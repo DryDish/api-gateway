@@ -1,4 +1,5 @@
 import Express from "express";
+import { teacherGuard } from "../middleware/authorise.middleware.js";
 import { ClassCodeService } from "../service/class-code-service.js";
 
 const router = Express.Router();
@@ -12,6 +13,8 @@ router.get("/attend/:code", async (req, res) => {
 
   ClassCodeService.markAttendance(status, userId, res);
 });
+
+router.use(teacherGuard);
 
 router.get("/:lectureId", async (req, res) => {
   console.log("KEA write-api called on GET class-code/:lectureId");

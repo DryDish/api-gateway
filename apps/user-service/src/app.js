@@ -3,7 +3,7 @@ import './config/sequelize.js';
 import express, { json } from 'express';
 import { UserRouter } from './routes/user.routes.js';
 import { authRouter } from './routes/auth.routes.js';
-import { verifyToken } from './middleware/authorise.middleware.js';
+import { verifyToken } from './middleware/authorize.middleware.js';
 
 const PORT = process.env.USER_SERVICE_PORT || 3001;
 

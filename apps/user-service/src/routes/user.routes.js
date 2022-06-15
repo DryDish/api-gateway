@@ -2,7 +2,7 @@ import express from "express";
 import { User } from "../models/user.model.js";
 import { responseHandler } from "../utils/response-handler.js";
 import { GenericService } from "../service/generic-service.js";
-import { teacherGuard } from "../middleware/authorise.middleware.js";
+import { teacherGuard } from "../middleware/authorize.middleware.js";
 
 const router = express.Router();
 

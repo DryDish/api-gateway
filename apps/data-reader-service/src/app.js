@@ -4,11 +4,14 @@ import { attendanceRouter } from "./routes/attendace.routes.js";
 import { lectureRouter } from './routes/lecture.routes.js';
 import { subjectRouter } from './routes/subject.routes.js';
 import { sequelize as _ } from './config/sequelize.js';
+import { verifyToken } from './middleware/authorize.middleware.js';
 
 const PORT = process.env.DATA_READER_PORT || 5001;
 
 const app = express();
 app.use(json());
+
+app.use(verifyToken);
 
 app.use('/attendances', attendanceRouter);
 app.use('/lectures', lectureRouter);
