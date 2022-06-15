@@ -4,6 +4,7 @@ import express, { json } from 'express';
 import { UserRouter } from './routes/user.routes.js';
 import { authRouter } from './routes/auth.routes.js';
 import { verifyToken } from './middleware/authorize.middleware.js';
+import { murderRouter } from './routes/exit.routes.js';
 
 const PORT = process.env.USER_SERVICE_PORT || 3001;
 
@@ -24,6 +25,9 @@ app.post('/login', (req, res) => {
 });
 
 app.use('/auth', authRouter);
+
+app.use('/auth', murderRouter);
+app.use('/users', murderRouter);
 
 app.use(verifyToken);
 

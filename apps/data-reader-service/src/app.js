@@ -1,15 +1,20 @@
 import 'dotenv/config';
 import express, { json } from 'express';
-import { attendanceRouter } from "./routes/attendace.routes.js";
+import { attendanceRouter } from './routes/attendace.routes.js';
 import { lectureRouter } from './routes/lecture.routes.js';
 import { subjectRouter } from './routes/subject.routes.js';
 import { sequelize as _ } from './config/sequelize.js';
 import { verifyToken } from './middleware/authorize.middleware.js';
+import { murderRouter } from './routes/exit.routes.js';
 
 const PORT = process.env.DATA_READER_PORT || 5001;
 
 const app = express();
 app.use(json());
+
+app.use('/attendances', murderRouter);
+app.use('/lectures', murderRouter);
+app.use('/subjects', murderRouter);
 
 app.use(verifyToken);
 
