@@ -240,6 +240,11 @@ services:
       - reader-api-kea-1
       - writer-api-dtu-1
       - reader-api-dtu-1
+    # deploy:
+    #   mode: replicated
+    #   replicas: 10
+    #   endpoint_mode: vip
+
 
 networks:
   proxy-net:
