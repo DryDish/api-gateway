@@ -215,8 +215,8 @@ services:
       timeout: 2s
       retries: 10
       start_period: 3s
-    ports:
-      - 3306:3306
+    # ports:
+    #   - 3306:3306
 
 # ----------------------------------------
 # --------------API-GATEWAY --------------
