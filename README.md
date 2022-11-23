@@ -77,10 +77,9 @@ Inside the docs folder i have included a [postman collection](./docs/API%20Gatew
 
 This can be imported by going to your postman collections, and clicking the import button.
 
-<figure align="center">
-    <img src="./docs/images/postman-import.png">
-    <figcaption>Import button</figcaption>
-</figure>
+
+<img src="./docs/images/postman-import.png">
+
 
 From there, select the file from the directory in `docs/API Gateway.postman_collection.json` and select the import button.
 
@@ -94,10 +93,7 @@ This will return a token. This is a JWT token that is valid for 1 hour. To use t
 
 To do this, click on the `API Gateway` workspace, then click on the `Authorization` tab, select the Type to be `Bearer Token` and paste the token you got from the previous request here, lastly, don't forget to save, as nothing will work until that is done.
 
-<figure align="center">
-    <img src="./docs/images/postman-set-token.png">
-    <figcaption>Setting the token</figcaption>
-</figure>
+<img src="./docs/images/postman-set-token.png">
 
 Now you are ready to make some calls.
 
@@ -112,18 +108,11 @@ Head into data-reader-service -> attendances -> all.
 
 If you click the Headers tab, you should see the pre-made Host headers i just mentioned, selecting either will allow you to make a call as though you where doing it from one of those schools.
 
-<figure align="center">
-    <img src="./docs/images/postman-header-tab.png">
-    <figcaption>Postman headers tab</figcaption>
-</figure>
-
+<img src="./docs/images/postman-header-tab.png">
 
 If you make two calls, one with each header set, you should see logs that look like this from the docker compose output:
 
-<figure align="center">
-    <img src="./docs/images/docker-compose-reader-logs-1.png">
-    <figcaption>docker-compose log</figcaption>
-</figure>
+<img src="./docs/images/docker-compose-reader-logs-1.png">
 
 These are the individual services' logs about communication. Notice also how its only ever number 1 that of each school service that responds.
 
@@ -137,7 +126,4 @@ Since all these images are local, they will restart very quickly, so in order fo
 For the next 30 seconds, any calls to the service that was just murdered will send all requests to the 2nd instance. This continues until the main instance is registered as online, at which point all traffic will once again return to it.
 
 Example:
-<figure align="center">
-    <img src="./docs/images/docker-compose-murder-logs.png">
-    <figcaption>docker-compose log of murder</figcaption>
-</figure>
+<img src="./docs/images/docker-compose-murder-logs.png">
