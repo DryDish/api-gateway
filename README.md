@@ -1,6 +1,19 @@
 # API Gateway
 
-## About
+### Table of Contents
+
+ * [About](#about)
+    * [Docker](#docker)
+    * [Nginx](#nginx)
+    * [Docker Compose](#docker-compose)
+ * [How to](#how-to)
+    * [Basic commands](#basic-commands)
+    * [Instructions](#instructions)
+        * [Setting up Postman](#setting-up-postman)
+        * [Making calls as schools](#making-calls)
+
+    
+# <a name="about"></a>About
 This project was created to showcase how an nginx nginx reverse proxy acting as a load balancer.
 
 To create it, a project was taken from the KEA class for Development of Large Systems. It was adapted to become stateless and be independently replicable. The original project was split into three core APIs. One API designed to read from the database, one API to write to the database, and a final api to handle user authentication.
@@ -13,17 +26,17 @@ The students then can sign in on their student accounts and mark their own atten
 
 Once the project was adapted, it was decided that two schools would be simulated for this, KEA and DTU.
 
-## Docker
+## <a name="docker"></a>Docker
 The project was containerized and put into a single Docker Compose to make it easy to spin up.
 
 As this project is only a demo, all required .env files are also included in the repository, and have been renamed so as to not be a problem once released into the wild.
 
 
-## Nginx
+## <a name="nginx"></a>Nginx
 Nginx works as the entry point into the system. It reroutes traffic based on the host url. This project is configured to listen for two different hosts, mimicking two different 'schools' that would utilize the system.
 
 
-# Docker Compose
+## <a name="docker-compose">Docker Compose
 Docker compose will automatically load all needed .env files and boot up the following systems:
 
 
@@ -54,9 +67,9 @@ Each school has two instances of their core API running at all times. If the mai
 
 The user service on the other hand, has both of it's instances running at all times, and all traffic is routed to one or the other to assure maximum throughput, as this service is contacted rather often by both schools.
 
-# How to
+# <a name="how-to">How to
 
-## Basic commands
+## <a name="basic-commands">Basic commands
 
 There are only two terminal comnands needed to get this project running:
 * `docker-compose up`
@@ -71,7 +84,9 @@ If you do not have access to that terminal anymore, you can also shut it down by
 Run `docker-compose down` a second time to remove the containers as well.
 
 
-## Instructions
+## <a name="Instructions">Instructions
+
+### <a name="postman-setup">Setting up Postman
 
 Inside the docs folder i have included a [postman collection](./docs/API%20Gateway.postman_collection.json), I **strongly** advise using that as it is pre-configured for exactly this demo. 
 
@@ -99,7 +114,7 @@ Now you are ready to make some calls.
 
 Teachers have more callable endpoints that students, so feel free to try endpoints to see what you can or can not access, however, this is not a project that had much focus on security, so in general, there is far more access that there should be. If access is denied, you will receive a 401 with a JSON message stating so.
 
-### Making calls as a different school
+### <a name="making-calls">Making calls as schools
 To make this as easy as possible i have pre-configured the Headers of all requests with three presets: host-kea, host-dtu and host-user. For the purposes of this I will only be using the two school ones. 
 
 For this demo I have signed in as a teacher.
