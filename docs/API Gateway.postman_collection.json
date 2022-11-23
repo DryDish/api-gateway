@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fa984e12-1f69-49e9-bdb0-ddf7ad8ec130",
+		"_postman_id": "80f16fdb-ca6a-40f4-9444-891f503b0ddd",
 		"name": "API Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12895297"
@@ -338,7 +338,7 @@
 			]
 		},
 		{
-			"name": "data-reader-service-kea",
+			"name": "data-reader-service",
 			"item": [
 				{
 					"name": "attendances",
@@ -363,14 +363,14 @@
 										"key": "Host",
 										"value": "{{host-kea}}",
 										"description": "simulate kea's login url",
-										"type": "text",
-										"disabled": true
+										"type": "text"
 									},
 									{
 										"key": "Host",
 										"value": "{{host-dtu}}",
 										"description": "simulate dtu's login url",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									},
 									{
 										"key": "Host",
@@ -445,14 +445,14 @@
 										"key": "Host",
 										"value": "{{host-kea}}",
 										"description": "simulate kea's login url",
-										"type": "text",
-										"disabled": true
+										"type": "text"
 									},
 									{
 										"key": "Host",
 										"value": "{{host-dtu}}",
 										"description": "simulate dtu's login url",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									},
 									{
 										"key": "Host",
@@ -735,7 +735,7 @@
 			]
 		},
 		{
-			"name": "data-writer-service-kea",
+			"name": "data-writer-service",
 			"item": [
 				{
 					"name": "class-code",
@@ -907,7 +907,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYW5uQGtlYS5kayIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNjU1MzMxMjg3LCJleHAiOjE2NTUzMzQ4ODd9.XCYV5t8QhDGG3g3pMpu3al3qnMSq7A_cBOHQ3H0W3gI",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYW5uQGtlYS5kayIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNjY5MjMzNDYyLCJleHAiOjE2NjkyMzcwNjJ9.2qS7Cs_0u-Sm-6Ux28XvF6fMsbGJNMRsiL3ERm5kNLg",
 				"type": "string"
 			}
 		]
